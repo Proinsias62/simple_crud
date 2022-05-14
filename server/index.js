@@ -6,6 +6,8 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+//Note these are my settings for the database change accordingly
+//I called the database employee_system as opposed to employeeSystem
 const db = mysql.createConnection({
   host: "localhost",
   user: "francis",
@@ -21,7 +23,7 @@ app.post("/create", (req, res) => {
   const wage = req.body.wage;
 
   db.query(
-    "INSERT INTO employee(name, age, country, position, wage) VALUES (?,?,?,?,?);",
+    "INSERT INTO employees(name, age, country, position, wage) VALUES (?,?,?,?,?);",
     [name, age, country, position, wage],
     (err, result) => {
       if (err) {
@@ -34,7 +36,7 @@ app.post("/create", (req, res) => {
 });
 
 app.get("/employees", (req, res) => {
-  db.query("SELECT * FROM employee", (err, result) => {
+  db.query("SELECT * FROM employees", (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -47,7 +49,7 @@ app.put("/update", (req, res) => {
   const id = req.body.id;
   const wage = req.body.wage;
   db.query(
-    "UPDATE employee SET wage = ? WHERE id = ?",
+    "UPDATE employees SET wage = ? WHERE id = ?",
     [wage, id],
     (err, result) => {
       if (err) {
@@ -61,7 +63,7 @@ app.put("/update", (req, res) => {
 
 app.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
-  db.query("DELETE FROM employee WHERE id = ?", id, (err, result) => {
+  db.query("DELETE FROM employees WHERE id = ?", id, (err, result) => {
     if (err) {
       console.log(err);
     } else {
