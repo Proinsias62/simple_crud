@@ -84,13 +84,13 @@ function App() {
     //Clears Employee Information Input Boxes
     console.log("handle Submit Update event")
     event.preventDefault();
-    //setNewWage(0);
     event.target.reset();
   }
 
   return (
     <div className="App">
       <div className="information">
+        <header>CRUD HR APP</header>
         <form onSubmit={handleSubmitUpdate}>
         <label>Name:</label>
         <input
@@ -120,7 +120,7 @@ function App() {
             setPosition(event.target.value);
           }}
         />
-        <label>Wage (year):</label>
+        <label>Salary:</label>
         <input
           type="number"
           onChange={(event) => {
@@ -145,7 +145,7 @@ function App() {
                 <h3>Wage: {val.wage}</h3>
               </div>
               <div>
-                <form onSubmit={handleSubmitUpdate}>
+                <form onSubmit={handleSubmitEmployee}>
                 <input
                   type="text"
                   placeholder="2000..."
